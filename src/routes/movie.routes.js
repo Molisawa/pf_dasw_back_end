@@ -2,9 +2,10 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const controller = require('../controllers/movie.controller');
 const router = express.Router();
+const auth = require('../middlewares');
 
 //create movie
-router.post('/movies', asyncHandler(controller.create));
+router.post('/movies',[auth.verifyToken, auth.isAdmin], asyncHandler(controller.create));
 
 //get all movies
 router.get('/movies', asyncHandler(controller.findAll));
@@ -13,10 +14,10 @@ router.get('/movies', asyncHandler(controller.findAll));
 router.get('/movies/:id', asyncHandler(controller.findById));
 
 // update movie
-router.put('/movies/:id', asyncHandler(controller.update));
+router.put('/movies/:id',[auth.verifyToken, auth.isAdmin], asyncHandler(controller.update));
 
 //delete movie
-router.delete('/movies/:id', asyncHandler(controller.remove));
+router.delete('/movies/:id',[auth.verifyToken, auth.isAdmin], asyncHandler(controller.remove));
 
     
 

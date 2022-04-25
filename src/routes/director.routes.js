@@ -2,9 +2,10 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const controller = require('../controllers/director.controller');
 const router = express.Router();
+const auth = require('../middlewares');
 
 //create director
-router.post('/directors', asyncHandler(controller.create));
+router.post('/directors',[auth.verifyToken, auth.isAdmin], asyncHandler(controller.create));
 
 //get all directors
 router.get('/directors', asyncHandler(controller.findAll));
@@ -13,10 +14,10 @@ router.get('/directors', asyncHandler(controller.findAll));
 router.get('/directors/:id', asyncHandler(controller.findById));
 
 // update director
-router.put('/directors/:id', asyncHandler(controller.update));
+router.put('/directors/:id',[auth.verifyToken, auth.isAdmin], asyncHandler(controller.update));
 
 //delete director
-router.delete('/directors/:id', asyncHandler(controller.remove));
+router.delete('/directors/:id',[auth.verifyToken, auth.isAdmin], asyncHandler(controller.remove));
 
     
 

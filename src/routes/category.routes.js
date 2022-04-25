@@ -14,10 +14,10 @@ router.get('/categories', asyncHandler(controller.findAll));
 router.get('/categories/:id', asyncHandler(controller.findById));
 
 // update category
-router.put('/categories/:id', asyncHandler(controller.update));
+router.put('/categories/:id',[auth.verifyToken, auth.isAdmin], asyncHandler(controller.update));
 
 //delete category
-router.delete('/categories/:id', asyncHandler(controller.remove));
+router.delete('/categories/:id',[auth.verifyToken, auth.isAdmin], asyncHandler(controller.remove));
 
     
 
