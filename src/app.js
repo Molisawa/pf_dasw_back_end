@@ -7,8 +7,7 @@ const studioRouter = require('./routes/studio.routes')
 const categoryRouter = require('./routes/category.routes')
 const actorRouter = require('./routes/actor.routes')
 const directorRouter = require('./routes/director.routes')
-
-
+const authRouter = require('./routes/auth.routes')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -24,7 +23,7 @@ app.use('/api/v1', studioRouter)
 app.use('/api/v1', categoryRouter)
 app.use('/api/v1', actorRouter)
 app.use('/api/v1', directorRouter)
-
+app.use('/api/v1', authRouter)
 
 
 //mongodb connection
