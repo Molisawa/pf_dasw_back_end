@@ -1,0 +1,45 @@
+###
+POST http://localhost:3000/api/v1/movies HTTP/1.1
+Content-Type: application/json
+
+{
+        "title": "Dare Devil",
+        "year": 2003,
+        "duration": "136 min",
+        "rating": "R",
+        "score": "5.3",
+        "category": "6266052276e64ca481572eb0",
+        "description": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+        "director": ["6266054a76e64ca481572eb4"],
+        "actor": ["6266051476e64ca481572eae"],
+        "studio": "6266055776e64ca481572eb6",
+        "poster": "https://images-na.ssl-images-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
+        "trailer": "https://www.youtube.com/embed/m8e-FF8MsqU"
+}
+
+###
+GET http://localhost:3000/api/v1/movies HTTP/1.1
+
+###
+GET http://localhost:3000/api/v1/movies/6264b4507e604d486bdc13aa HTTP/1.1
+
+###
+PUT http://localhost:3000/api/v1/movies/6264b4507e604d486bdc13ba HTTP/1.1
+Content-Type: application/json
+
+{
+        "title": "The Matrix",
+        "year": 1999,
+        "duration": 136,
+        "rating": "R",
+        "score": 8.7,
+        "category": [],
+        "description": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+        "director": [],
+        "cast": [],
+        "poster": "https://images-na.ssl-images-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
+        "trailer": "https://www.youtube.com/embed/m8e-FF8MsqU",
+}
+
+###
+DELETE http://localhost:3000/api/v1/movies/6264be5c2ef15ccdd9d78fac HTTP/1.1

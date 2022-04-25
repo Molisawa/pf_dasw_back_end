@@ -1,0 +1,28 @@
+###
+POST http://localhost:3000/api/v1/users HTTP/1.1
+Content-Type: application/json
+
+{
+        "name": "Benjaminosss",
+        "email": "benjamin@benjamin.com",
+        "password": "123456"
+}
+
+###
+GET http://localhost:3000/api/v1/users HTTP/1.1
+
+###
+GET http://localhost:3000/api/v1/users/6264b4507e604d486bdc13aa HTTP/1.1
+
+###
+PUT http://localhost:3000/api/v1/users/6264b4507e604d486bdc13ba HTTP/1.1
+Content-Type: application/json
+
+{
+        "name": "Ernesto Vazquezz",
+        "email": "benjamin@benjamin.com",
+        "password": "123456"
+}
+
+###
+DELETE http://localhost:3000/api/v1/users/6264be5c2ef15ccdd9d78fac HTTP/1.1

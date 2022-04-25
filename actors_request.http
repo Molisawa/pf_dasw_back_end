@@ -1,0 +1,28 @@
+###
+POST http://localhost:3000/api/v1/actors HTTP/1.1
+Content-Type: application/json
+
+{
+        "name": "Ben Affleck",
+        "age": "50",
+        "character": "Dare devil"
+}
+
+###
+GET http://localhost:3000/api/v1/actors HTTP/1.1
+
+###
+GET http://localhost:3000/api/v1/actors/6264e32c156de2380daff912 HTTP/1.1
+
+###
+PUT http://localhost:3000/api/v1/actors/6264e32c156de2380daff912 HTTP/1.1
+Content-Type: application/json
+
+{
+        "name": "Ben Affleck",
+        "age": "50",
+        "character": "Batman"
+}
+
+###
+DELETE http://localhost:3000/api/v1/actors/6264e3af156de2380daff91b HTTP/1.1
