@@ -1,12 +1,12 @@
 const express = require('express')
 const mongoose = require('mongoose')
 require('dotenv').config();
-const userRouter = require('./routes/user')
-const movieRouter = require('./routes/movie')
-const studioRouter = require('./routes/studio')
-const categoryRouter = require('./routes/category')
-const actorRouter = require('./routes/actor')
-const directorRouter = require('./routes/director')
+const userRouter = require('./routes/user.routes')
+const movieRouter = require('./routes/movie.routes')
+const studioRouter = require('./routes/studio.routes')
+const categoryRouter = require('./routes/category.routes')
+const actorRouter = require('./routes/actor.routes')
+const directorRouter = require('./routes/director.routes')
 
 
 
