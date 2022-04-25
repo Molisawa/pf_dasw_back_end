@@ -39,8 +39,6 @@ const isAdmin = async (req, res, next) => {
     }
     
     return res.status(401).json({ message: "Unauthorized, Admin Role required." });
-
-    next();
 };
 
 

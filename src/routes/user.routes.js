@@ -3,9 +3,10 @@ const asyncHandler = require('express-async-handler');
 const controller = require('../controllers/user.controller');
 const router = express.Router();
 const auth = require('../middlewares');
+const verifySignup = require('../middlewares/verifySignup');
 
 //create user
-router.post('/users',[auth.verifyToken, auth.isAdmin], asyncHandler(controller.create));
+router.post('/users',[auth.verifyToken, auth.isAdmin, verifySignup.isRoleExist], asyncHandler(controller.create));
 
 //get all users
 router.get('/users', asyncHandler(controller.findAll));
