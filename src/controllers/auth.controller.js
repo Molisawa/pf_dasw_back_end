@@ -1,10 +1,11 @@
-const User = require("../models/user");
-const jwt = require("jsonwebtoken");
-const config = require("../config");
-const Role = require("../models/role");
+import User from "../models/user";
+import pkg from 'jsonwebtoken';
+const { sign } = pkg;
+import { SECRET } from "../config";
+import Role from "../models/role";
 
 
-const signUp = async (req, res) => {
+export const signUp = async (req, res) => {
     const { name, email, password, roles } = req.body;
 
     const newUser = new User({
@@ -27,7 +28,7 @@ const signUp = async (req, res) => {
    console.log(savedUser);
 
 
-   const token = jwt.sign({ _id: savedUser._id }, config.SECRET, { expiresIn: "86400" });
+   const token = sign({ _id: savedUser._id }, SECRET, { expiresIn: "86400" });
 
    res.status(200).json({ token});
 
@@ -36,7 +37,7 @@ const signUp = async (req, res) => {
 
 
 
-const signIn = async (req, res) => {
+export const signIn = async (req, res) => {
         const { email, password } = req.body;
 
         const userFound = await User.findOne({email}).populate("roles");
@@ -47,12 +48,7 @@ const signIn = async (req, res) => {
 
         if (!matchPasword) return res.status(401).json({ token: null, message: "Password incorrect" });
 
-        const token = jwt.sign({ _id: userFound._id }, config.SECRET, { expiresIn: "86400" });
+        const token = sign({ _id: userFound._id }, SECRET, { expiresIn: "86400" });
         
         res.status(200).json({ token });
-};
-
-module.exports = {
-    signUp,
-    signIn
 };

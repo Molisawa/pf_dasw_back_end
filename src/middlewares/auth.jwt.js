@@ -1,16 +1,17 @@
-const jwt = require('jsonwebtoken');
-const config = require('../config');
-const User = require('../models/user');
-const Role = require('../models/role');
+import pkg from 'jsonwebtoken';
+const { verify } = pkg;
+import { SECRET } from '../config';
+import User from '../models/user';
+import Role from '../models/role';
 
-const verifyToken = async (req, res, next) => {
+export const verifyToken = async (req, res, next) => {
     
     try {
         const token = req.headers['x-access-token'] || req.headers['authorization'];
 
         if (!token) return res.status(403).json({ message: "No token provided" });
     
-        const decoded = jwt.verify(token, config.SECRET);
+        const decoded = verify(token, SECRET);
         req.userId = decoded._id;
         const user = await User.findById(req.userId, { password: 0 });
         
@@ -27,7 +28,7 @@ const verifyToken = async (req, res, next) => {
 
 };
 
-const isAdmin = async (req, res, next) => {
+export const isAdmin = async (req, res, next) => {
     const user = await User.findById(req.userId, { password: 0 });
     const roles = await Role.find({ _id: { $in: user.roles } })
 
@@ -39,10 +40,4 @@ const isAdmin = async (req, res, next) => {
     }
     
     return res.status(401).json({ message: "Unauthorized, Admin Role required." });
-};
-
-
-module.exports = {
-    verifyToken,
-    isAdmin
 };

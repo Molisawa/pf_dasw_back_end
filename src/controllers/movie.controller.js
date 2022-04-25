@@ -1,11 +1,11 @@
 
-const Movie = require('../models/movie');
-const Category = require('../models/category');
-const Actor = require('../models/actor');
-const Director = require('../models/director');
-const Studio = require('../models/studio');
+import Movie from '../models/movie';
+import Category from '../models/category';
+import Actor from '../models/actor';
+import Director from '../models/director';
+import Studio from '../models/studio';
 
-const create = async (req, res) => {
+export const create = async (req, res) => {
     const content = req.body;
 
     const category = await Category.findById(content.category);
@@ -39,7 +39,7 @@ const create = async (req, res) => {
     });
 };
 
-const findAll = async (req, res) => {
+export const findAll = async (req, res) => {
 
     // find all movies include populate
     const movies = await Movie
@@ -64,7 +64,7 @@ const findAll = async (req, res) => {
     });
 };
 
-const findById = async (req, res) => {
+export const findById = async (req, res) => {
     const { id } = req.params;
     const movie = await Movie.findOne({ _id: id });
 
@@ -80,7 +80,7 @@ const findById = async (req, res) => {
     });
 };
 
-const update = async (req, res) => {
+export const update = async (req, res) => {
     const { id } = req.params;
     const { name, email, password } = req.body;
     const movie = await Movie.findOneAndUpdate({ _id: id }, { $set: { name, email, password } });
@@ -97,7 +97,7 @@ const update = async (req, res) => {
     });
 };
 
-const remove = async (req, res) => {
+export const remove = async (req, res) => {
     const { id } = req.params;
     const movie = await Movie.findOneAndDelete({ _id: id });
 
@@ -112,13 +112,4 @@ const remove = async (req, res) => {
         movie: movie
     });
 
-};
-
-
-module.exports = {
-    create,
-    findAll,
-    findById,
-    update,
-    remove
 };

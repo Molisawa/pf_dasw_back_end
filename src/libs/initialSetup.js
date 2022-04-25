@@ -1,9 +1,9 @@
-const Role = require("../models/role");
+import Role, { estimatedDocumentCount } from "../models/role";
 
 const createRoles = async () => {
 
     try {
-        const count = await Role.estimatedDocumentCount()
+        const count = await estimatedDocumentCount()
 
         if (count > 0) {
             return;
@@ -21,4 +21,4 @@ const createRoles = async () => {
    
 };
 
-module.exports = createRoles;
+export default createRoles;

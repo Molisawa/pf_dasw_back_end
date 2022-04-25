@@ -1,19 +1,21 @@
-const express = require('express')
-const mongoose = require('mongoose')
-require('dotenv').config();
-const userRouter = require('./routes/user.routes')
-const movieRouter = require('./routes/movie.routes')
-const studioRouter = require('./routes/studio.routes')
-const categoryRouter = require('./routes/category.routes')
-const actorRouter = require('./routes/actor.routes')
-const directorRouter = require('./routes/director.routes')
-const authRouter = require('./routes/auth.routes')
+import express, { json } from 'express';
+import pkg from 'mongoose';
+const { Promise, connect } = pkg;
+import dotenv from 'dotenv'
 
+import userRouter from './routes/user.routes';
+import movieRouter from './routes/movie.routes';
+import studioRouter from './routes/studio.routes';
+import categoryRouter from './routes/category.routes';
+import actorRouter from './routes/actor.routes';
+import directorRouter from './routes/director.routes';
+import authRouter from './routes/auth.routes';
+dotenv.config()
 const app = express()
 const port = process.env.PORT || 3000
 
 // middleware
-app.use(express.json());
+app.use(json());
 
 // call routes 
 
@@ -27,10 +29,9 @@ app.use('/api/v1', authRouter)
 
 
 //mongodb connection
-mongoose.Promise = global.Promise;
+// Promise = global.Promise;
 
-mongoose
-    .connect(process.env.MONGODB_URI)
+connect(process.env.MONGODB_URI)
     .then(() => { console.log('Database is connected') })
     .catch(err => { console.log('Can not connect to the database' + err) });
 

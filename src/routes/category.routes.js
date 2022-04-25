@@ -1,29 +1,22 @@
-const express = require('express');
-const asyncHandler = require('express-async-handler');
-const controller = require('../controllers/category.controller');
-const router = express.Router();
-const auth = require('../middlewares');
+import { Router } from 'express';
+import asyncHandler from 'express-async-handler';
+import { create, findAll, findById, update, remove } from '../controllers/category.controller';
+const router = Router();
+import { verifyToken, isAdmin } from '../middlewares/auth.jwt';
 
 //create category
-router.post('/categories',[auth.verifyToken, auth.isAdmin], asyncHandler(controller.create));
+router.post('/categories',[verifyToken, isAdmin], asyncHandler(create));
 
 //get all categories
-router.get('/categories', asyncHandler(controller.findAll));
+router.get('/categories', asyncHandler(findAll));
 
 //get category by id
-router.get('/categories/:id', asyncHandler(controller.findById));
+router.get('/categories/:id', asyncHandler(findById));
 
 // update category
-router.put('/categories/:id',[auth.verifyToken, auth.isAdmin], asyncHandler(controller.update));
+router.put('/categories/:id',[verifyToken, isAdmin], asyncHandler(update));
 
 //delete category
-router.delete('/categories/:id',[auth.verifyToken, auth.isAdmin], asyncHandler(controller.remove));
+router.delete('/categories/:id',[verifyToken, isAdmin], asyncHandler(remove));
 
-    
-
-
-
-        
-
-
-module.exports = router;
+export default router;

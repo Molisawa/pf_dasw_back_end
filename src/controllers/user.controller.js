@@ -1,7 +1,7 @@
 
-const User = require('../models/user');
+import User from '../models/user';
 
-const create = async (req, res) => {
+export const create = async (req, res) => {
     const user = User(req.body);
     res.status(201).json(
         await user
@@ -15,7 +15,7 @@ const create = async (req, res) => {
     );
 };
 
-const findAll = async (req, res) => {
+export const findAll = async (req, res) => {
     res.status(200).json(
          await User
          .find()
@@ -28,7 +28,7 @@ const findAll = async (req, res) => {
     );
 };
 
-const findById = async (req, res) => {
+export const findById = async (req, res) => {
     const { id } = req.params;
     const user = await User.findOne({ _id: id });
 
@@ -44,7 +44,7 @@ const findById = async (req, res) => {
     });
 };
 
-const update = async (req, res) => {
+export const update = async (req, res) => {
     const { id } = req.params;
     const { name, email, password } = req.body;
     const user = await User.findOneAndUpdate({ _id: id }, { $set: { name, email, password } });
@@ -61,7 +61,7 @@ const update = async (req, res) => {
     });
 };
 
-const remove = async (req, res) => {
+export const remove = async (req, res) => {
     const { id } = req.params;
     const user = await User.findOneAndDelete({ _id: id });
 
@@ -76,13 +76,4 @@ const remove = async (req, res) => {
         user: user
     });
 
-};
-
-
-module.exports = {
-    create,
-    findAll,
-    findById,
-    update,
-    remove
 };

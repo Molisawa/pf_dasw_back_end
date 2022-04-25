@@ -1,3 +1,1 @@
-module.exports = {
-    SECRET: 'bridgerton-api-secret',
-}
+export const SECRET = 'bridgerton-api-secret';

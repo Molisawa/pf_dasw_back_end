@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+import pkg from 'mongoose';
+const { Schema, model } = pkg;
 const {ObjectId} = Schema;
 
 const actorSchema = new Schema(
@@ -27,4 +27,4 @@ const actorSchema = new Schema(
 
 );
 
-module.exports = mongoose.model("Actor", actorSchema);
+export default model('Actor', actorSchema);

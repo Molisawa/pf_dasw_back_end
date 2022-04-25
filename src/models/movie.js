@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-const {ObjectId} = mongoose.Schema; 
+import pkg from 'mongoose';
+const { Schema, model } = pkg;
+const {ObjectId} = Schema;
 
 const movieSchema = new Schema(
   {
@@ -58,4 +58,4 @@ const movieSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model("Movie", movieSchema);
+export default model('Movie', movieSchema);

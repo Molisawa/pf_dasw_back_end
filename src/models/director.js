@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+import pkg from 'mongoose';
+const { Schema, model } = pkg;
 const {ObjectId} = Schema;
 
 const directorSchema = new Schema(
@@ -22,4 +22,4 @@ const directorSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model("Director", directorSchema);
+export default model('Director', directorSchema);

@@ -1,7 +1,7 @@
 
-const Actor = require('../models/actor');
+import Actor from '../models/actor';
 
-const create = async (req, res) => {
+export const create = async (req, res) => {
     const actor = Actor(req.body);
     res.status(201).json(
         await actor
@@ -15,7 +15,7 @@ const create = async (req, res) => {
     );
 };
 
-const findAll = async (req, res) => {
+export const findAll = async (req, res) => {
     const actors = await Actor
     .find()
     .populate('movies', {
@@ -35,7 +35,7 @@ const findAll = async (req, res) => {
     });
 };
 
-const findById = async (req, res) => {
+export const findById = async (req, res) => {
     const { id } = req.params;
     const actor = await Actor.findOne({ _id: id });
 
@@ -51,7 +51,7 @@ const findById = async (req, res) => {
     });
 };
 
-const update = async (req, res) => {
+export const update = async (req, res) => {
     const { id } = req.params;
     const { name, email, password } = req.body;
     const actor = await Actor.findOneAndUpdate({ _id: id }, { $set: { name, email, password } });
@@ -68,7 +68,7 @@ const update = async (req, res) => {
     });
 };
 
-const remove = async (req, res) => {
+export const remove = async (req, res) => {
     const { id } = req.params;
     const actor = await Actor.findOneAndDelete({ _id: id });
 
@@ -83,13 +83,4 @@ const remove = async (req, res) => {
         actor: actor
     });
 
-};
-
-
-module.exports = {
-    create,
-    findAll,
-    findById,
-    update,
-    remove
 };

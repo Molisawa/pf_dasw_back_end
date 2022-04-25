@@ -1,30 +1,26 @@
-const express = require('express');
-const asyncHandler = require('express-async-handler');
-const controller = require('../controllers/user.controller');
-const router = express.Router();
-const auth = require('../middlewares');
-const verifySignup = require('../middlewares/verifySignup');
+import { Router } from 'express';
+import asyncHandler from 'express-async-handler';
+import { create, findAll, findById, update, remove } from '../controllers/user.controller';
+const router = Router();
+import { verifyToken, isAdmin } from '../middlewares/auth.jwt';
+import { isRoleExist } from '../middlewares/verifySignup';
 
 //create user
-router.post('/users',[auth.verifyToken, auth.isAdmin, verifySignup.isRoleExist], asyncHandler(controller.create));
+router.post('/users',[verifyToken, isAdmin, isRoleExist], asyncHandler(create));
 
 //get all users
-router.get('/users', asyncHandler(controller.findAll));
+router.get('/users', asyncHandler(findAll));
 
 //get user by id
-router.get('/users/:id', asyncHandler(controller.findById));
+router.get('/users/:id', asyncHandler(findById));
 
 // update user
-router.put('/users/:id',[auth.verifyToken, auth.isAdmin], asyncHandler(controller.update));
+router.put('/users/:id',[verifyToken, isAdmin], asyncHandler(update));
 
 //delete user
-router.delete('/users/:id',[auth.verifyToken, auth.isAdmin], asyncHandler(controller.remove));
-
-    
+router.delete('/users/:id',[verifyToken, isAdmin], asyncHandler(remove));
 
 
 
-        
 
-
-module.exports = router;
+export default router;

@@ -1,6 +1,7 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const Schema = mongoose.Schema;
+
+import pkg from 'mongoose';
+const { Schema, model } = pkg;
+import { genSalt, hash as _hash, compare } from "bcrypt";
 const {ObjectId} = Schema;
 const userSchema = new Schema(
   {
@@ -27,13 +28,13 @@ const userSchema = new Schema(
 );
 
 userSchema.statics.encryptPassword = async (password) => {
-  const salt = await bcrypt.genSalt(10);
-  return bcrypt.hash(password, salt);
+  const salt = await genSalt(10);
+  return _hash(password, salt);
 };
 
 userSchema.statics.matchPassword = async (password, hash) => {
-  return await bcrypt.compare(password, hash);
+  return await compare(password, hash);
 };
 
 
-module.exports = mongoose.model("User", userSchema);
+export default model('User', userSchema);

@@ -1,29 +1,24 @@
-const express = require('express');
-const asyncHandler = require('express-async-handler');
-const controller = require('../controllers/studio.controller');
-const router = express.Router();
-const auth = require('../middlewares');
+import { Router } from 'express';
+import asyncHandler from 'express-async-handler';
+import { create, findAll, findById, update, remove } from '../controllers/studio.controller';
+const router = Router();
+import { verifyToken, isAdmin } from '../middlewares/auth.jwt';
 
 //create studio
-router.post('/studios',[auth.verifyToken, auth.isAdmin], asyncHandler(controller.create));
+router.post('/studios',[verifyToken, isAdmin], asyncHandler(create));
 
 //get all studios
-router.get('/studios', asyncHandler(controller.findAll));
+router.get('/studios', asyncHandler(findAll));
 
 //get studio by id
-router.get('/studios/:id', asyncHandler(controller.findById));
+router.get('/studios/:id', asyncHandler(findById));
 
 // update studio
-router.put('/studios/:id',[auth.verifyToken, auth.isAdmin], asyncHandler(controller.update));
+router.put('/studios/:id',[verifyToken, isAdmin], asyncHandler(update));
 
 //delete studio
-router.delete('/studios/:id',[auth.verifyToken, auth.isAdmin], asyncHandler(controller.remove));
-
-    
-
-
-
+router.delete('/studios/:id',[verifyToken, isAdmin], asyncHandler(remove));
         
 
 
-module.exports = router;
+export default router;

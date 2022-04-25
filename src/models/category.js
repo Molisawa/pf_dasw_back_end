@@ -1,7 +1,8 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+import pkg from 'mongoose';
+const { Schema, model } = pkg;
 const {ObjectId} = Schema;
-const categorySchema = new mongoose.Schema(
+
+const categorySchema = new Schema(
   {
     name: {
       type: String,
@@ -19,4 +20,4 @@ const categorySchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Category", categorySchema);
+export default model('Category', categorySchema);

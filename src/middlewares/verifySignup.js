@@ -1,9 +1,9 @@
-const User = require('../models/user');
+import User from '../models/user';
 
 const ROLES = ['user', 'admin'];
 
 
-const isRoleExist = (req, res, next) => {
+export const isRoleExist = (req, res, next) => {
 
     const roles = req.body.roles;
 
@@ -21,7 +21,7 @@ next();
 
 };
 
-const isEmailorUsernameDuplicated = async (req, res, next) => {
+export const isEmailorUsernameDuplicated = async (req, res, next) => {
     const { email, name } = req.body;
     const userName = await User.findOne({ name });
     if(userName) return res.status(400).json({ message: `${name} is already taken` } );
@@ -32,5 +32,3 @@ const isEmailorUsernameDuplicated = async (req, res, next) => {
 
     next();
 };
-
-module.exports = {isRoleExist, isEmailorUsernameDuplicated};

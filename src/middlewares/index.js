@@ -1,7 +1,7 @@
-const {verifyToken, isAdmin} = require('../middlewares/auth.jwt');
-const {isRoleExist, isEmailorUsernameDuplicated} = require('../middlewares/verifySignup');
+import { verifyToken, isAdmin } from '../middlewares/auth.jwt';
+import { isRoleExist, isEmailorUsernameDuplicated } from '../middlewares/verifySignup';
 
-module.exports = {
+export default {
     verifyToken,
     isAdmin,
     isRoleExist,

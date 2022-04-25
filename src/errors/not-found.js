@@ -1,4 +1,4 @@
-const HttpError = require('./http-error');
+import HttpError from './http-error';
 
 class NotFoundError extends HttpError {
     constructor(message) {
@@ -7,4 +7,4 @@ class NotFoundError extends HttpError {
     }
 }
 
-module.exports = NotFoundError;
+export default NotFoundError;

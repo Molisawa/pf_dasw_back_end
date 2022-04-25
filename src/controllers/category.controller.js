@@ -1,7 +1,7 @@
 
-const Category = require('../models/category');
+import Category from '../models/category';
 
-const create = async (req, res) => {
+export const create = async (req, res) => {
     const category = Category(req.body);
     
     res.status(201).json(
@@ -16,7 +16,7 @@ const create = async (req, res) => {
     );
 };
 
-const findAll = async (req, res) => {
+export const findAll = async (req, res) => {
     const categories = await Category
     .find()
     .populate('movies', {
@@ -36,7 +36,7 @@ const findAll = async (req, res) => {
     });
 };
 
-const findById = async (req, res) => {
+export const findById = async (req, res) => {
     const { id } = req.params;
     const category = await Category.findOne({ _id: id });
 
@@ -52,7 +52,7 @@ const findById = async (req, res) => {
     });
 };
 
-const update = async (req, res) => {
+export const update = async (req, res) => {
     const { id } = req.params;
     const { name, email, password } = req.body;
     const category = await Category.findOneAndUpdate({ _id: id }, { $set: { name, email, password } });
@@ -69,7 +69,7 @@ const update = async (req, res) => {
     });
 };
 
-const remove = async (req, res) => {
+export const remove = async (req, res) => {
     const { id } = req.params;
     const category = await Category.findOneAndDelete({ _id: id });
 
@@ -84,13 +84,4 @@ const remove = async (req, res) => {
         category: category
     });
 
-};
-
-
-module.exports = {
-    create,
-    findAll,
-    findById,
-    update,
-    remove
 };
