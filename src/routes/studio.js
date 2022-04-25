@@ -1,6 +1,6 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
-const controller = require('../controllers/studio');
+const controller = require('../controllers/studio.controller');
 const router = express.Router();
 
 //create studio

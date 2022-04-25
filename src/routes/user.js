@@ -1,6 +1,6 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
-const controller = require('../controllers/user');
+const controller = require('../controllers/user.controller');
 const router = express.Router();
 
 //create user

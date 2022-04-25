@@ -1,6 +1,6 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
-const controller = require('../controllers/movie');
+const controller = require('../controllers/movie.controller');
 const router = express.Router();
 
 //create movie

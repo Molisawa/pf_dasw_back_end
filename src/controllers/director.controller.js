@@ -19,7 +19,7 @@ const findAll = async (req, res) => {
     const directors = await Director
     .find()
     .populate('movies', {
-        name: 1,
+        title: 1,
         description: 1
         });
     

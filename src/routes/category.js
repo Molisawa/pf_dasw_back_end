@@ -1,6 +1,6 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
-const controller = require('../controllers/category');
+const controller = require('../controllers/category.controller');
 const router = express.Router();
 
 //create category

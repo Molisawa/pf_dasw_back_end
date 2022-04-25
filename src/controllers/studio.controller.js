@@ -19,7 +19,7 @@ const findAll = async (req, res) => {
     const studios = await Studio
     .find()
     .populate('movies', {
-        name: 1,
+        title: 1,
         description: 1
     });
 
