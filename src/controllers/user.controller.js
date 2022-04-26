@@ -63,19 +63,43 @@ export const findById = async (req, res) => {
 
 export const update = async (req, res) => {
     const { id } = req.params;
-    const { name, email, password } = req.body;
-    const user = await User.findOneAndUpdate({ _id: id }, { $set: { name, email, password } });
+    const { email, password, roles } = req.body;
     
-    if (!user) {
-        res.status(404).json({
-            message: 'User not found'
+    if(roles) {
+        const foundRoles = await Role.find({ name: { $in: roles } })
+        const user = await User.findOneAndUpdate({ _id: id }, {
+            email,
+            password: await User.encryptPassword(password),
+            roles: foundRoles.map(role => role._id)
+        }, { new: true });
+
+        if (!user) {
+            res.status(404).json({
+                message: 'User not found'
+            });
+        }
+    
+        res.status(200).json({
+            message: 'User updated successfully',
+            user: user
+        });
+    }else {
+        const user = await User.findOneAndUpdate({ _id: id }, {
+            email,
+            password: await User.encryptPassword(password)
+        }, { new: true });
+
+        if (!user) {
+            res.status(404).json({
+                message: 'User not found'
+            });
+        }
+    
+        res.status(200).json({
+            message: 'User updated successfully',
+            user: user
         });
     }
-
-    res.status(200).json({
-        message: 'User updated successfully',
-        user: user
-    });
 };
 
 export const remove = async (req, res) => {
