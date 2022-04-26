@@ -3,6 +3,8 @@ import pkg from 'mongoose';
 const { Promise, connect } = pkg;
 import dotenv from 'dotenv'
 
+import {createRoles} from './libs/initialSetup';
+
 import userRouter from './routes/user.routes';
 import movieRouter from './routes/movie.routes';
 import studioRouter from './routes/studio.routes';
@@ -12,6 +14,7 @@ import directorRouter from './routes/director.routes';
 import authRouter from './routes/auth.routes';
 dotenv.config()
 const app = express()
+createRoles();
 const port = process.env.PORT || 3000
 
 // middleware
