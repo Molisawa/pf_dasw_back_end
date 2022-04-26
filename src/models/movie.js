@@ -24,10 +24,10 @@ const movieSchema = new Schema(
       type: String,
       required: true,
     },
-    category: {
+    category: [{
       type: ObjectId,
       ref: "Category"
-    },
+    }],
     description: {
       type: String,
       required: true,
