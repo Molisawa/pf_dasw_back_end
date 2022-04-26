@@ -25,7 +25,7 @@ Content-Type: application/json
 GET http://localhost:3000/api/v1/users HTTP/1.1
 
 ###
-GET http://localhost:3000/api/v1/users/6264b4507e604d486bdc13aa HTTP/1.1
+GET http://localhost:3000/api/v1/users/62669c9afb02a45faee3b9eb HTTP/1.1
 
 ###
 PUT http://localhost:3000/api/v1/users/6264b4507e604d486bdc13ba HTTP/1.1

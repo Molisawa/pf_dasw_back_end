@@ -1,18 +1,35 @@
-
-import User from '../models/user';
+import User from "../models/user";
+import pkg from 'jsonwebtoken';
+const { sign } = pkg;
+import { SECRET } from "../config";
+import Role from "../models/role";
 
 export const create = async (req, res) => {
-    const user = User(req.body);
-    res.status(201).json(
-        await user
-        .save()
-        .then(result => {
-            res.status(201).json({
-                message: 'User created successfully',
-                user: result
-            });
-        })
-    );
+    const { name, email, password, roles } = req.body;
+
+    const newUser = new User({
+        name,
+        email,
+        password: await User.encryptPassword(password),
+        roles,
+    });
+
+    if(roles) {
+        const foundRoles = await Role.find({ name: { $in: roles } })
+        newUser.roles = foundRoles.map(role => role._id)
+    }else {
+        const role = await Role.findOne({ name: "user" })
+        newUser.roles = [role._id]
+    }
+
+
+   const savedUser = await newUser.save();
+   console.log(savedUser);
+
+
+   const token = sign({ _id: savedUser._id }, SECRET, { expiresIn: "86400" });
+
+   res.status(200).json({ token });
 };
 
 export const findAll = async (req, res) => {
