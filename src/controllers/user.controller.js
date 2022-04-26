@@ -27,7 +27,7 @@ export const create = async (req, res) => {
    console.log(savedUser);
 
 
-   const token = sign({ _id: savedUser._id }, SECRET, { expiresIn: "86400" });
+   const token = sign({ _id: savedUser._id }, SECRET, { expiresIn: "7d" });
 
    res.status(200).json({ token });
 };

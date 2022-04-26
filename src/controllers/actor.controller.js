@@ -23,9 +23,9 @@ export const findAll = async (req, res) => {
         description: 1
     });
 
-    if (!actors) {
+    if (!actors || actors.length === 0) {
         res.status(404).json({
-            message: 'Actors not found'
+            message: 'There are no actors'
         });
     }
 
@@ -53,8 +53,8 @@ export const findById = async (req, res) => {
 
 export const update = async (req, res) => {
     const { id } = req.params;
-    const { name, email, password } = req.body;
-    const actor = await Actor.findOneAndUpdate({ _id: id }, { $set: { name, email, password } });
+    const { name, age, character } = req.body;
+    const actor = await Actor.findOneAndUpdate({ _id: id }, { $set: { name, age, character } });
     
     if (!actor) {
         res.status(404).json({

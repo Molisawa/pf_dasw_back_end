@@ -23,7 +23,7 @@ export const findAll = async (req, res) => {
         description: 1
     });
 
-    if (!studios) {
+    if (!studios || studios.length === 0) {
         res.status(404).json({
             message: 'Studios not found'
         });

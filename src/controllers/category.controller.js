@@ -24,7 +24,7 @@ export const findAll = async (req, res) => {
         description: 1
     });
 
-    if (!categories) {
+    if (!categories || categories.length === 0) {
         res.status(404).json({
             message: 'Categories not found'
         });
@@ -54,8 +54,8 @@ export const findById = async (req, res) => {
 
 export const update = async (req, res) => {
     const { id } = req.params;
-    const { name, email, password } = req.body;
-    const category = await Category.findOneAndUpdate({ _id: id }, { $set: { name, email, password } });
+    const { name } = req.body;
+    const category = await Category.findOneAndUpdate({ _id: id }, { $set: { name } });
     
     if (!category) {
         res.status(404).json({

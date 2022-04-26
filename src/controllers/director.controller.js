@@ -23,7 +23,7 @@ export const findAll = async (req, res) => {
         description: 1
         });
     
-    if (!directors) {
+    if (!directors || directors.length === 0) {
         res.status(404).json({
             message: 'Directors not found'
         });
@@ -54,8 +54,8 @@ export const findById = async (req, res) => {
 
 export const update = async (req, res) => {
     const { id } = req.params;
-    const { name, email, password } = req.body;
-    const director = await Director.findOneAndUpdate({ _id: id }, { $set: { name, email, password } });
+    const { name, age } = req.body;
+    const director = await Director.findOneAndUpdate({ _id: id }, { $set: { name, age} });
     
     if (!director) {
         res.status(404).json({
