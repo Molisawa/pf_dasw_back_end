@@ -2,7 +2,7 @@ import express, { json } from 'express';
 import pkg from 'mongoose';
 const { Promise, connect } = pkg;
 import dotenv from 'dotenv'
-
+import cors from 'cors';
 import {createRoles} from './libs/initialSetup';
 
 import userRouter from './routes/user.routes';
@@ -14,6 +14,7 @@ import directorRouter from './routes/director.routes';
 import authRouter from './routes/auth.routes';
 dotenv.config()
 const app = express()
+app.use(cors())
 createRoles();
 const port = process.env.PORT || 3000
 

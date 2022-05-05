@@ -81,6 +81,37 @@ export const findById = async (req, res) => {
   });
 };
 
+export const findByTitle = async (req, res) => {
+  const { title } = req.params;
+  const movie = await Movie.findOne({ title: title })
+  .populate("category", {
+    name: 1,
+  })
+  .populate("actor", {
+    name: 1,
+  })
+  .populate("director", {
+    name: 1,
+  })
+  .populate("studio", {
+    name: 1,
+  });
+
+  if (!movie) {
+    res.status(404).json({
+      message: "Movie not found",
+    });
+  }
+
+  res.status(200).json({
+    message: "Movie fetched successfully",
+    movie: movie,
+  }
+  );
+
+
+};
+
 export const update = async (req, res) => {
   const { id } = req.params;
   const { title, year, duration, rating, score, category, description, director, actor, studio, posrter, trailer } = req.body;

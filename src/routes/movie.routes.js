@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import asyncHandler from 'express-async-handler';
-import { create, findAll, findById, update, remove } from '../controllers/movie.controller';
+import { create, findAll, findById, findByTitle, update, remove } from '../controllers/movie.controller';
 const router = Router();
 import { verifyToken, isAdmin } from '../middlewares/auth.jwt';
 
@@ -12,6 +12,9 @@ router.get('/movies', asyncHandler(findAll));
 
 //get movie by id
 router.get('/movies/:id', asyncHandler(findById));
+
+//get movie by title
+router.post('/movies/:title', asyncHandler(findByTitle));
 
 // update movie
 router.put('/movies/:id',[verifyToken, isAdmin], asyncHandler(update));
