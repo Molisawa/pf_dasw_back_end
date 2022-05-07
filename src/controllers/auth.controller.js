@@ -27,8 +27,10 @@ export const signUp = async (req, res) => {
    const savedUser = await newUser.save();
    console.log(savedUser);
 
+   const user = await User.findById(savedUser._id).populate("roles");
 
-   const token = sign({ _id: savedUser._id }, SECRET, { expiresIn: "7d" });
+
+   const token = sign({ _id: savedUser._id, roles: user.roles }, SECRET, { expiresIn: "7d" });
 
    res.status(200).json({ token});
 
@@ -48,7 +50,7 @@ export const signIn = async (req, res) => {
 
         if (!matchPasword) return res.status(401).json({ token: null, message: "Password incorrect" });
 
-        const token = sign({ _id: userFound._id }, SECRET, { expiresIn: "7d" });
+        const token = sign({ _id: userFound._id, roles: userFound.roles }, SECRET, { expiresIn: "7d" });
         
         res.status(200).json({ token });
 };
