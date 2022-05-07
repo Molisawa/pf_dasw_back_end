@@ -55,7 +55,7 @@ export const findById = async (req, res) => {
 export const update = async (req, res) => {
     const { id } = req.params;
     const { name } = req.body;
-    const category = await Category.findOneAndUpdate({ _id: id }, { $set: { name } });
+    const category = await Category.findOneAndUpdate({ _id: id }, { $set: { name } }, { new: true });
     
     if (!category) {
         res.status(404).json({

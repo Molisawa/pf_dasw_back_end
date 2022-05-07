@@ -54,7 +54,7 @@ export const findById = async (req, res) => {
 export const update = async (req, res) => {
     const { id } = req.params;
     const { name, email, password } = req.body;
-    const studio = await Studio.findOneAndUpdate({ _id: id }, { $set: { name, email, password } });
+    const studio = await Studio.findOneAndUpdate({ _id: id }, { $set: { name, email, password } }, { new: true });
     
     if (!studio) {
         res.status(404).json({

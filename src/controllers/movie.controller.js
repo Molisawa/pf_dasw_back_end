@@ -117,7 +117,8 @@ export const update = async (req, res) => {
   const { title, year, duration, rating, score, category, description, director, actor, studio, posrter, trailer } = req.body;
   const movie = await Movie.findOneAndUpdate(
     { _id: id },
-    { $set: { title, year, duration, rating, score, category, description, director, actor, studio, posrter, trailer } }
+    { $set: { title, year, duration, rating, score, category, description, director, actor, studio, posrter, trailer } },
+    { new: true }
   );
 
   if (!movie) {
