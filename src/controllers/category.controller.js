@@ -19,9 +19,11 @@ export const create = async (req, res) => {
 export const findAll = async (req, res) => {
     const categories = await Category
     .find()
+    // To show poster and year on cards, this could change based on UI requiremens for the cards
     .populate('movies', {
         title: 1,
-        description: 1
+        poster: 1,
+        year: 1
     });
 
     if (!categories || categories.length === 0) {

@@ -67,7 +67,8 @@ export const findAll = async (req, res) => {
 
 export const findById = async (req, res) => {
   const { id } = req.params;
-  const movie = await Movie.findOne({ _id: id });
+  // Necessary to show names in UI (and avoid to make a lot of querys to differente endpoints on client side)
+  const movie = await Movie.findOne({ _id: id }).populate('studio', { name: 1 }).populate('actor', { name: 1 }).populate('director', { name: 1 });
 
   if (!movie) {
     res.status(404).json({
@@ -114,10 +115,10 @@ export const findByTitle = async (req, res) => {
 
 export const update = async (req, res) => {
   const { id } = req.params;
-  const { title, year, duration, rating, score, category, description, director, actor, studio, posrter, trailer } = req.body;
+  const { title, year, duration, rating, score, category, description, director, actor, studio, poster, trailer } = req.body;
   const movie = await Movie.findOneAndUpdate(
     { _id: id },
-    { $set: { title, year, duration, rating, score, category, description, director, actor, studio, posrter, trailer } }
+    { $set: { title, year, duration, rating, score, category, description, director, actor, studio, poster, trailer } }
   );
 
   if (!movie) {
