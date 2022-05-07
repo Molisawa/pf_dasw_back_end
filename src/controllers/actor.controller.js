@@ -54,7 +54,7 @@ export const findById = async (req, res) => {
 export const update = async (req, res) => {
     const { id } = req.params;
     const { name, age, character } = req.body;
-    const actor = await Actor.findOneAndUpdate({ _id: id }, { $set: { name, age, character } });
+    const actor = await Actor.findOneAndUpdate({ _id: id }, { $set: { name, age, character } }, { new: true });
     
     if (!actor) {
         res.status(404).json({

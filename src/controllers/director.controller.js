@@ -55,7 +55,7 @@ export const findById = async (req, res) => {
 export const update = async (req, res) => {
     const { id } = req.params;
     const { name, age } = req.body;
-    const director = await Director.findOneAndUpdate({ _id: id }, { $set: { name, age} });
+    const director = await Director.findOneAndUpdate({ _id: id }, { $set: { name, age} }, { new: true });
     
     if (!director) {
         res.status(404).json({
