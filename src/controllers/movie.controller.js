@@ -84,7 +84,8 @@ export const findById = async (req, res) => {
 
 export const findByTitle = async (req, res) => {
   const { title } = req.params;
-  const movie = await Movie.findOne({ title: title })
+  const movie = await Movie.find({ title: { $regex: `${title}.*` } })
+  .limit(2)
   .populate("category", {
     name: 1,
   })
@@ -118,7 +119,7 @@ export const update = async (req, res) => {
   const { title, year, duration, rating, score, category, description, director, actor, studio, poster, trailer } = req.body;
   const movie = await Movie.findOneAndUpdate(
     { _id: id },
-    { $set: { title, year, duration, rating, score, category, description, director, actor, studio, posrter, trailer } },
+    { $set: { title, year, duration, rating, score, category, description, director, actor, studio, poster, trailer } },
     { new: true }
   );
 
